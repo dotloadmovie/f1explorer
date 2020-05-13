@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"f1.pit_stops"}],"uuid":"a7f3fe95d0ca4541a60fb16fd2218055"}

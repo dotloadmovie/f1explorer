@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"f1.driver_standings"}],"uuid":"2e6d448b67fc4b50b19baebe8d5031a8"}
