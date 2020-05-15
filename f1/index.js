@@ -2,9 +2,12 @@ const { Keystone } = require('@keystonejs/keystone');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
+const CircuitSchema = require('./lists/Circuit.js');
+
 
 const PROJECT_NAME = 'f1';
 const adapterConfig = { mongoUri: 'mongodb://localhost/f1' };
+
 
 
 /**
@@ -17,6 +20,8 @@ const keystone = new Keystone({
   name: PROJECT_NAME,
   adapter: new Adapter(adapterConfig),
 });
+
+keystone.createList('Circuit', CircuitSchema);
 
 module.exports = {
   keystone,
