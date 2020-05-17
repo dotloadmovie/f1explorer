@@ -34,6 +34,8 @@ const keystone = new Keystone({
   adapter: new Adapter(adapterConfig),
 });
 
+
+
 keystone.createList('Circuit', CircuitSchema);
 keystone.createList('Constructor_Result', ConstructorResultSchema);
 keystone.createList('Constructor_Standing', ConstructorStandingSchema);
