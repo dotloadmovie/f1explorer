@@ -1,37 +1,67 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from "apollo-boost";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Circuits from './pages/circuits';
+import Constructors from './pages/constructors';
+import Drivers from './pages/drivers';
+import styled from 'styled-components';
 
 
-const ALL_CIRCUITS = gql`
-{
-  allCircuits {
-    name,
-    url,
-    circuitId
-
-  }
-}
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row
 `
 
+const Menu = styled.div`
+  width: 200px;
+  display: flex;
+`;
 
-function App() {
-  const {loading, error, data} = useQuery(ALL_CIRCUITS);
-  
-  if(loading) {
-    return <p>loading</p>;
-  };
+const Content = styled.div`
+  display: flex;
+  flex-grow: 1
+`;
 
-  if(error) {
-    return <p>error occurred</p>;
-  }
-
+const App:React.FC = () => {
   return (
-    <div className="App">
-      {data.allCircuits.map((item:any) => {
-        return <p key={item.circuitId}>{item.name}</p>
-      })}
-    </div>
+    <Router>
+      <Wrapper>
+
+        <Menu>
+          <ul>
+            <li><Link to="/circuits">Circuits</Link></li>
+            <li><Link to="/constructors">Constructors</Link></li>
+            <li><Link to="/drivers">Drivers</Link></li>
+          </ul>
+        </Menu>
+
+        <Content>
+        
+            <Switch>
+              <Route exact path="/">
+                <p>Home</p>
+              </Route>
+
+              <Route path="/circuits">
+                <Circuits />
+              </Route>
+              <Route path="/constructors">
+                <Constructors />
+              </Route>
+              <Route path="/drivers">
+                <Drivers />
+              </Route>
+            </Switch>
+          
+        </Content>
+      </Wrapper>
+    </Router>
+
   );
 }
 
