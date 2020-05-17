@@ -14,8 +14,8 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row
-`
+  flex-direction: row;
+`;
 
 const Menu = styled.div`
   width: 200px;
@@ -24,7 +24,7 @@ const Menu = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-grow: 1
+  flex-grow: 1;
 `;
 
 const App:React.FC = () => {
