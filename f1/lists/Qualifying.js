@@ -1,4 +1,6 @@
 const {Text, Integer, Float} = require('@keystonejs/fields');
+const {lockedAuth} = require('../auth/locked');
+const {unlockedAuth} = require('../auth/unlocked');
 
 const fields = {
     qualifyId: {
@@ -31,6 +33,7 @@ const fields = {
 }
 
 module.exports = {
+    access: (process.env.NODE_ENV === 'development')? unlockedAuth : lockedAuth,
     fields
 }
 

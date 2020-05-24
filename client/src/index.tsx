@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/admin/api',
+  uri: 'http://localhost:3001/api',
 });
 
 ReactDOM.render(
@@ -15,7 +15,7 @@ ReactDOM.render(
       <App />
     </ApolloProvider>
   </React.StrictMode>,
-  
+
   document.getElementById('root')
 );
 

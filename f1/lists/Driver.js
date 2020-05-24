@@ -1,4 +1,6 @@
 const {Text, Integer} = require('@keystonejs/fields');
+const {lockedAuth} = require('../auth/locked');
+const {unlockedAuth} = require('../auth/unlocked');
 
 const fields = {
     driverId: {
@@ -25,6 +27,7 @@ const fields = {
 };
 
 module.exports = {
+    access: (process.env.NODE_ENV === 'development')? unlockedAuth : lockedAuth,
     fields
 }
 
