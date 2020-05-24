@@ -21,6 +21,7 @@ This is really an experiment in its earliest stage. However, it can be run in 3 
 
 ### Populate database
 ```bash
+cd data
 mongorestore -d f1 f1
 ```
 
