@@ -59,7 +59,7 @@ const Drivers: React.FC = () => {
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
         return Object.assign({}, prev, {
-          allDrivers: [...prev.allDrivers, ...fetchMoreResult.allDrivers],
+          allDrivers: [...fetchMoreResult.allDrivers],
         });
       },
     });
@@ -71,12 +71,13 @@ const Drivers: React.FC = () => {
     fetchMore({
       variables: {
         offset: page * pageSize,
+        limit: pageSize,
         sortBy: `${sort}_${sortDir}`,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev;
         return Object.assign({}, prev, {
-          allDrivers: [...prev.allDrivers, ...fetchMoreResult.allDrivers],
+          allDrivers: [...fetchMoreResult.allDrivers],
         });
       },
     });
@@ -90,6 +91,7 @@ const Drivers: React.FC = () => {
     fetchMore({
       variables: {
         offset: 0,
+        limit: pageSize,
         sortBy: `${sortId}_${sortOrder.toUpperCase()}`,
       },
       updateQuery: (prev, { fetchMoreResult }) => {

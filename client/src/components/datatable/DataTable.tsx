@@ -55,17 +55,23 @@ export const DataTable: React.FC<TableProps> = ({
 
   const handleChangeRowsPerPage = (evt: BaseSyntheticEvent) => {
     setPage(0);
-    //handleDataOffsetChange(0)
-
     handleDataSizeChange(parseInt(evt.target.value, 10));
   };
 
-  const handleChangeSort = (sortId: string, sortOrder: SortDirections) => {
+  const handleChangeSort = (sortId: string) => {
+    let overrideOrder: SortDirections = SortDirections.ASC;
+
+    if (sortId === orderBy) {
+      if (order === SortDirections.ASC) {
+        overrideOrder = SortDirections.DESC;
+      } else {
+        overrideOrder = SortDirections.ASC;
+      }
+    }
+
     setOrderBy(sortId);
-
-    handleSort(sortId, sortOrder);
-
-    //setOrder(sortOrder);
+    setOrder(overrideOrder);
+    handleSort(sortId, overrideOrder);
   };
 
   const renderTableHeader = () => {
@@ -80,19 +86,9 @@ export const DataTable: React.FC<TableProps> = ({
               >
                 <TableSortLabel
                   active={orderBy === header.match}
-                  direction={
-                    orderBy === header.match ? order : SortDirections.ASC
-                  }
+                  direction={order}
                   onClick={() => {
-                    handleChangeSort(header.match, SortDirections.ASC);
-
-                    /*if (order === SortDirections.ASC) {
-                      setOrder(SortDirections.DESC);
-                    } else if (order === SortDirections.DESC) {
-                      setOrder(undefined);
-                    } else {
-                      setOrder(SortDirections.ASC);
-                    }*/
+                    handleChangeSort(header.match);
                   }}
                 >
                   {header.label}
@@ -120,26 +116,37 @@ export const DataTable: React.FC<TableProps> = ({
     });
   };
 
+  const renderPagination = () => {
+    return (
+      <DataTablePagination
+        page={page}
+        colSpan={headers.length}
+        rowsPerPage={rowsPerPage}
+        size={size}
+        handleChangePage={handleChangePage}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+    );
+  };
+
   if (!rows || rows.length < 1) {
     return <p>No results</p>;
   }
 
   return (
-    <Table size="small" stickyHeader>
-      {renderTableHeader()}
-      <TableBody>{renderTableRows()}</TableBody>
-      <TableFooter>
-        <TableRow>
-          <DataTablePagination
-            page={page}
-            colSpan={headers.length}
-            rowsPerPage={rowsPerPage}
-            size={size}
-            handleChangePage={handleChangePage}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </TableRow>
-      </TableFooter>
-    </Table>
+    <>
+      <table style={{ width: "100%" }}>
+        <tbody>
+          <tr>{renderPagination()}</tr>
+        </tbody>
+      </table>
+      <Table size="small" stickyHeader>
+        {renderTableHeader()}
+        <TableBody>{renderTableRows()}</TableBody>
+        <TableFooter>
+          <TableRow>{renderPagination()}</TableRow>
+        </TableFooter>
+      </Table>
+    </>
   );
 };
