@@ -1,18 +1,14 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Circuits from './pages/Circuits';
-import Constructors from './pages/Constructors';
-import Drivers from './pages/Drivers';
-import {Main} from './layouts/main/Main';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Circuits from "./pages/Circuits";
+import Constructors from "./pages/Constructors";
+import Drivers from "./pages/Drivers";
 
+import Driver from "./pages/Driver";
 
+import { Main } from "./layouts/main/Main";
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   return (
     <Router>
       <Main>
@@ -30,11 +26,14 @@ const App:React.FC = () => {
           <Route path="/drivers">
             <Drivers />
           </Route>
-        </Switch>
-        </Main>
-    </Router>
 
+          <Route path="/driver/:id">
+            <Driver />
+          </Route>
+        </Switch>
+      </Main>
+    </Router>
   );
-}
+};
 
 export default App;
