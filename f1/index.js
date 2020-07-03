@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === "development") {
   apps.push(
     new AdminUIApp({
       enableDefaultRoute: false,
-      apiPath: "/admin/api",
+      apiPath: "/api",
       isAccessAllowed: true,
     })
   );
