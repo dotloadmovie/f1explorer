@@ -20,10 +20,17 @@ Currently the application is at a very early state - an initial datalayer is run
 This is really an experiment in its earliest stage. However, it can be run in 3 steps:
 
 ### Populate database
+Run with the MongoDB daemon running
 ```bash
 cd data
 mongorestore -d f1 f1
 ```
+
+Verify the connection string
+```bash
+mongo mongodb://localhost/f1
+```
+This should output some gibberish to your terminal console and connect you to the database. Enter `exit` to return to the command line.
 
 ### Build services
 ```bash
